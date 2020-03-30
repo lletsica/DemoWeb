@@ -1,1 +1,2086 @@
-{}
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Banesco Rest API",
+        "version": "API V1",
+        "description": "Banesco API proporciona un grupo de servicios para desarrollar aplicaciones que permitan consultar cuentas y realizar transferencias",
+        "termsOfService": "www.termsofservices.banesco.api.example.com",
+        "contact": {
+            "name": "myaddressapisupport@banesco.com"
+        },
+        "license": {
+            "name": "License of API",
+            "url": "API license URL"
+        }
+    },
+    "host": "api-2445582934466.staging.gw.apicast.io",
+    "basePath": "/",
+    "paths": {
+        "/financial-account/accounts/{accountId}": {
+            "get": {
+                "produces": [
+                    "*/*"
+                ],
+                "tags": [
+                    "financial-account-controller"
+                ],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "x-data-threescale-name": "user_keys"
+                    },
+                    {
+                        "name": "accountId",
+                        "description": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La solicitud ha tenido éxito",
+                        "schema": {
+                            "$ref": "#/definitions/ReadAccountBalanceRs"
+                        }
+                    },
+                    "401": {
+                        "description": "La solicitud requiere autenticación"
+                    },
+                    "403": {
+                        "description": "Está prohibido acceder al recurso que estaba tratando de alcanzar"
+                    },
+                    "404": {
+                        "description": "El servidor no ha encontrado nada que coincida con el URI de solicitud"
+                    }
+                },
+                "deprecated": false,
+                "operationId": "readAccountBalanceUsingGET",
+                "summary": "Permite consultar el saldo de una cuenta"
+            }
+        },
+        "/financial-account/banesco/transfer": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "tags": [
+                    "financial-account-controller"
+                ],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "x-data-threescale-name": "user_keys"
+                    },
+                    {
+                        "name": "request",
+                        "description": "request",
+                        "schema": {
+                            "$ref": "#/definitions/TransferBanescoAccountRq"
+                        },
+                        "in": "body",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La solicitud ha tenido éxito",
+                        "schema": {
+                            "$ref": "#/definitions/TransferBanescoAccountRs"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "La solicitud requiere autenticación"
+                    },
+                    "403": {
+                        "description": "Está prohibido acceder al recurso que estaba tratando de alcanzar"
+                    },
+                    "404": {
+                        "description": "El servidor no ha encontrado nada que coincida con el URI de solicitud"
+                    }
+                },
+                "deprecated": false,
+                "operationId": "transferBanescoAccountUsingPOST",
+                "summary": "Permite realizar transferencias entre cuentas Banesco"
+            }
+        },
+        "/financial-account/otherbank/transfer": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "tags": [
+                    "financial-account-controller"
+                ],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "x-data-threescale-name": "user_keys"
+                    },
+                    {
+                        "name": "request",
+                        "description": "request",
+                        "schema": {
+                            "$ref": "#/definitions/TransferOtherBankAccountRq"
+                        },
+                        "in": "body",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La solicitud ha tenido éxito",
+                        "schema": {
+                            "$ref": "#/definitions/TransferOtherBankAccountRs"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "La solicitud requiere autenticación"
+                    },
+                    "403": {
+                        "description": "Está prohibido acceder al recurso que estaba tratando de alcanzar"
+                    },
+                    "404": {
+                        "description": "El servidor no ha encontrado nada que coincida con el URI de solicitud"
+                    }
+                },
+                "deprecated": false,
+                "operationId": "transferOtherBankAccountUsingPOST",
+                "summary": "Permite realizar transferencias a cuentas de otros bancos"
+            }
+        },
+        "/financial-account/transfer": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "tags": [
+                    "financial-account-controller"
+                ],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "x-data-threescale-name": "user_keys"
+                    },
+                    {
+                        "name": "request",
+                        "description": "request",
+                        "schema": {
+                            "$ref": "#/definitions/TransferRequest"
+                        },
+                        "in": "body",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La solicitud ha tenido éxito",
+                        "schema": {
+                            "$ref": "#/definitions/TransferOtherBankAccountRs"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "La solicitud requiere autenticación"
+                    },
+                    "403": {
+                        "description": "Está prohibido acceder al recurso que estaba tratando de alcanzar"
+                    },
+                    "404": {
+                        "description": "El servidor no ha encontrado nada que coincida con el URI de solicitud"
+                    }
+                },
+                "deprecated": false,
+                "operationId": "transferAccountUsingPOST",
+                "summary": "Retorna una Transferencia de banesco banesco u otros bancos"
+            }
+        },
+        "/generator/id/instance-id": {
+            "get": {
+                "produces": [
+                    "*/*"
+                ],
+                "tags": [
+                    "generator-id-controller"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La solicitud ha tenido éxito",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "La solicitud requiere autenticación"
+                    },
+                    "403": {
+                        "description": "Está prohibido acceder al recurso que estaba tratando de alcanzar"
+                    },
+                    "404": {
+                        "description": "El servidor no ha encontrado nada que coincida con el URI de solicitud"
+                    }
+                },
+                "deprecated": false,
+                "operationId": "getInstanceIdUsingGET",
+                "summary": "Permite generar un identificador único de la instancia"
+            }
+        },
+        "/generator/id/request-id/{instanceId}": {
+            "get": {
+                "produces": [
+                    "*/*"
+                ],
+                "tags": [
+                    "generator-id-controller"
+                ],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "x-data-threescale-name": "user_keys"
+                    },
+                    {
+                        "name": "instanceId",
+                        "description": "instanceId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La solicitud ha tenido éxito",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "La solicitud requiere autenticación"
+                    },
+                    "403": {
+                        "description": "Está prohibido acceder al recurso que estaba tratando de alcanzar"
+                    },
+                    "404": {
+                        "description": "El servidor no ha encontrado nada que coincida con el URI de solicitud"
+                    }
+                },
+                "deprecated": false,
+                "operationId": "getRequestIdUsingGET",
+                "summary": "Permite generar un identificador único de la solicitud"
+            }
+        },
+        "/generator/id/transaction-id": {
+            "get": {
+                "produces": [
+                    "*/*"
+                ],
+                "tags": [
+                    "generator-id-controller"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La solicitud ha tenido éxito",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "La solicitud requiere autenticación"
+                    },
+                    "403": {
+                        "description": "Está prohibido acceder al recurso que estaba tratando de alcanzar"
+                    },
+                    "404": {
+                        "description": "El servidor no ha encontrado nada que coincida con el URI de solicitud"
+                    }
+                },
+                "deprecated": false,
+                "operationId": "getTransactionIdUsingGET",
+                "summary": "Permite generar un identificador único de la transacción"
+            }
+        },
+        "/header/{headerName}": {
+            "get": {
+                "produces": [
+                    "*/*"
+                ],
+                "tags": [
+                    "header-controller"
+                ],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "x-data-threescale-name": "user_keys"
+                    },
+                    {
+                        "name": "headerName",
+                        "description": "headerName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La solicitud ha tenido éxito",
+                        "schema": {
+                            "$ref": "#/definitions/MsgRqHdr"
+                        }
+                    },
+                    "401": {
+                        "description": "La solicitud requiere autenticación"
+                    },
+                    "403": {
+                        "description": "Está prohibido acceder al recurso que estaba tratando de alcanzar"
+                    },
+                    "404": {
+                        "description": "El servidor no ha encontrado nada que coincida con el URI de solicitud"
+                    }
+                },
+                "deprecated": false,
+                "operationId": "getHeaderUsingGET",
+                "summary": "Permite obtener la cabecera del mensaje apropiada para la solicitud"
+            }
+        },
+        "/risk-rating/blacklist/{customerId}": {
+            "get": {
+                "produces": [
+                    "*/*"
+                ],
+                "tags": [
+                    "risk-rating-controller"
+                ],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "x-data-threescale-name": "user_keys"
+                    },
+                    {
+                        "name": "customerId",
+                        "description": "customerId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La solicitud ha tenido éxito",
+                        "schema": {
+                            "$ref": "#/definitions/ReadAccountBalanceRs"
+                        }
+                    },
+                    "401": {
+                        "description": "La solicitud requiere autenticación"
+                    },
+                    "403": {
+                        "description": "Está prohibido acceder al recurso que estaba tratando de alcanzar"
+                    },
+                    "404": {
+                        "description": "El servidor no ha encontrado nada que coincida con el URI de solicitud"
+                    }
+                },
+                "deprecated": false,
+                "operationId": "validateCustomerBlackListUsingGET",
+                "summary": "Permite consultar si un cliente está en la lista negra"
+            },
+            "parameters": [
+                {
+                    "name": "api_key",
+                    "in": "query",
+                    "required": true,
+                    "type": "string",
+                    "x-data-threescale-name": "user_keys"
+                },
+                {
+                    "name": "customerId",
+                    "description": "Identificacion del cliente ejemplo V123456789",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        }
+    },
+    "definitions": {
+        "Account": {
+            "title": "Account",
+            "type": "object",
+            "properties": {
+                "acctBal": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AcctBal"
+                    },
+                    "xml": {
+                        "name": "AcctBal",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            },
+            "xml": {
+                "name": "Account",
+                "attribute": false,
+                "wrapped": false
+            }
+        },
+        "AccountRequest": {
+            "title": "AccountRequest",
+            "type": "object",
+            "properties": {
+                "acctId": {
+                    "type": "string"
+                },
+                "acctType": {
+                    "type": "string"
+                },
+                "bankInfo": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/BankInfoRequest"
+                    }
+                },
+                "customer": {
+                    "$ref": "#/definitions/CustomerRequest"
+                },
+                "xferAccMode": {
+                    "type": "string"
+                }
+            }
+        },
+        "AcctBal": {
+            "title": "AcctBal",
+            "type": "object",
+            "properties": {
+                "balType": {
+                    "type": "string",
+                    "xml": {
+                        "name": "BalType",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "curAmt": {
+                    "$ref": "#/definitions/CurAmt",
+                    "xml": {
+                        "name": "CurAmt",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "signalBalance": {
+                    "type": "string",
+                    "xml": {
+                        "name": "SignalBalance",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            },
+            "xml": {
+                "name": "AcctBal",
+                "attribute": false,
+                "wrapped": false
+            }
+        },
+        "AdditionalStatus": {
+            "title": "AdditionalStatus",
+            "type": "object",
+            "properties": {
+                "lineNumber": {
+                    "type": "string",
+                    "xml": {
+                        "name": "LineNumber",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "severity": {
+                    "type": "string",
+                    "xml": {
+                        "name": "Severity",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "statusCode": {
+                    "type": "string",
+                    "xml": {
+                        "name": "StatusCode",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "statusDesc": {
+                    "type": "string",
+                    "xml": {
+                        "name": "StatusDesc",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "statusType": {
+                    "type": "string",
+                    "xml": {
+                        "name": "StatusType",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "validationType": {
+                    "type": "string",
+                    "xml": {
+                        "name": "ValidationType",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            }
+        },
+        "ApplicantData": {
+            "title": "ApplicantData",
+            "type": "object",
+            "properties": {
+                "application": {
+                    "type": "string",
+                    "xml": {
+                        "name": "Application",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "channel": {
+                    "type": "string",
+                    "xml": {
+                        "name": "Channel",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "enterpriseCode": {
+                    "type": "string",
+                    "xml": {
+                        "name": "EnterpriseCode",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "hostName": {
+                    "type": "string",
+                    "xml": {
+                        "name": "HostName",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "idDocument": {
+                    "type": "string",
+                    "xml": {
+                        "name": "IdDocument",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "ipAddress": {
+                    "type": "string",
+                    "xml": {
+                        "name": "IpAddress",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "nationality": {
+                    "type": "string",
+                    "xml": {
+                        "name": "Nationality",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "planCode": {
+                    "type": "string",
+                    "xml": {
+                        "name": "PlanCode",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "privateChannelId": {
+                    "type": "string",
+                    "xml": {
+                        "name": "PrivateChannelId",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "rolType": {
+                    "type": "string",
+                    "xml": {
+                        "name": "RolType",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "stadisticId": {
+                    "type": "string",
+                    "xml": {
+                        "name": "StadisticId",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            },
+            "xml": {
+                "name": "ApplicantData",
+                "attribute": false,
+                "wrapped": false
+            }
+        },
+        "BankAcctTrnRec": {
+            "title": "BankAcctTrnRec",
+            "type": "object",
+            "properties": {
+                "controlKey": {
+                    "type": "string",
+                    "xml": {
+                        "name": "ControlKey",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "curAmt": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CurAmt"
+                    },
+                    "xml": {
+                        "name": "CurAmt",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "desc": {
+                    "type": "string",
+                    "xml": {
+                        "name": "Desc",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "firstNumber": {
+                    "type": "string",
+                    "xml": {
+                        "name": "FirstNumber",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "lastNumber": {
+                    "type": "string",
+                    "xml": {
+                        "name": "LastNumber",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "origDt": {
+                    "type": "string",
+                    "xml": {
+                        "name": "OrigDt",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "trnId": {
+                    "type": "string",
+                    "xml": {
+                        "name": "TrnId",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "trnStatus": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "xml": {
+                        "name": "TrnStatus",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "trnTypeRef": {
+                    "type": "string",
+                    "xml": {
+                        "name": "TrnTypeRef",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            }
+        },
+        "BankAcctTrnRecRequest": {
+            "title": "BankAcctTrnRecRequest",
+            "type": "object",
+            "properties": {
+                "controlKey": {
+                    "type": "string"
+                },
+                "curAmt": {
+                    "$ref": "#/definitions/CurAmtRequest"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "firstNumber": {
+                    "type": "string"
+                },
+                "lastNumber": {
+                    "type": "string"
+                },
+                "origDt": {
+                    "type": "string"
+                },
+                "trnId": {
+                    "type": "string"
+                },
+                "trnStatus": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "trnTypeRef": {
+                    "type": "string"
+                }
+            }
+        },
+        "BankInfo": {
+            "title": "BankInfo",
+            "type": "object",
+            "properties": {
+                "bankId": {
+                    "type": "string",
+                    "xml": {
+                        "name": "BankId",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "name": {
+                    "type": "string",
+                    "xml": {
+                        "name": "Name",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            },
+            "xml": {
+                "name": "BankInfo",
+                "attribute": false,
+                "wrapped": false
+            }
+        },
+        "BankInfoRequest": {
+            "title": "BankInfoRequest",
+            "type": "object",
+            "properties": {
+                "bankId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "Bankinfo": {
+            "title": "Bankinfo",
+            "type": "object",
+            "properties": {
+                "bankId": {
+                    "type": "string",
+                    "xml": {
+                        "name": "BankId",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "name": {
+                    "type": "string",
+                    "xml": {
+                        "name": "Name",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            },
+            "xml": {
+                "name": "Bankinfo",
+                "attribute": false,
+                "wrapped": false
+            }
+        },
+        "Banking": {
+            "title": "Banking",
+            "type": "object",
+            "properties": {
+                "bankAcctTrnRec": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/BankAcctTrnRec"
+                    }
+                }
+            }
+        },
+        "BankingRequest": {
+            "title": "BankingRequest",
+            "type": "object",
+            "properties": {
+                "bankAcctTrnRec": {
+                    "$ref": "#/definitions/BankAcctTrnRecRequest"
+                }
+            }
+        },
+        "BlackList": {
+            "title": "BlackList",
+            "type": "object",
+            "properties": {
+                "blackListRec": {
+                    "$ref": "#/definitions/BlackListRec",
+                    "xml": {
+                        "name": "BlackListRec",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            },
+            "xml": {
+                "name": "BlackList",
+                "attribute": false,
+                "wrapped": false
+            }
+        },
+        "BlackListRec": {
+            "title": "BlackListRec",
+            "type": "object",
+            "properties": {
+                "blackListBanesco": {
+                    "type": "string",
+                    "xml": {
+                        "name": "BlackListBanesco",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "blackListCbn": {
+                    "type": "string",
+                    "xml": {
+                        "name": "BlackListCbn",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            },
+            "xml": {
+                "name": "BlackListRec",
+                "attribute": false,
+                "wrapped": false
+            }
+        },
+        "CurAmt": {
+            "title": "CurAmt",
+            "type": "object",
+            "properties": {
+                "amt": {
+                    "format": "double",
+                    "type": "number",
+                    "xml": {
+                        "name": "Amt",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            },
+            "xml": {
+                "name": "CurAmt",
+                "attribute": false,
+                "wrapped": false
+            }
+        },
+        "CurAmtRequest": {
+            "title": "CurAmtRequest",
+            "type": "object",
+            "properties": {
+                "amt": {
+                    "format": "double",
+                    "type": "number"
+                }
+            }
+        },
+        "Customer": {
+            "title": "Customer",
+            "type": "object",
+            "properties": {
+                "personInfo": {
+                    "$ref": "#/definitions/PersonInfo",
+                    "xml": {
+                        "name": "PersonInfo",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            },
+            "xml": {
+                "name": "Customer",
+                "attribute": false,
+                "wrapped": false
+            }
+        },
+        "CustomerRequest": {
+            "title": "CustomerRequest",
+            "type": "object",
+            "properties": {
+                "personInfo": {
+                    "$ref": "#/definitions/PersonInfoRequest"
+                }
+            }
+        },
+        "MsgRqHdr": {
+            "title": "MsgRqHdr",
+            "type": "object",
+            "properties": {
+                "applicantData": {
+                    "$ref": "#/definitions/ApplicantData",
+                    "xml": {
+                        "name": "ApplicantData",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "finalStatusRequest": {
+                    "type": "string",
+                    "xml": {
+                        "name": "FinalStatusRequest",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "lastStatusRequest": {
+                    "type": "string",
+                    "xml": {
+                        "name": "LastStatusRequest",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "lineId": {
+                    "type": "string",
+                    "xml": {
+                        "name": "LineId",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "messageDate": {
+                    "type": "string",
+                    "xml": {
+                        "name": "MessageDate",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "messageId": {
+                    "type": "string",
+                    "xml": {
+                        "name": "MessageId",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "messageTime": {
+                    "type": "string",
+                    "xml": {
+                        "name": "MessageTime",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "networkTrnInfo": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/NetworkTrnInfo"
+                    },
+                    "xml": {
+                        "name": "NetworkTrnInfo",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "operatorCode": {
+                    "type": "string",
+                    "xml": {
+                        "name": "OperatorCode",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "priority": {
+                    "type": "string",
+                    "xml": {
+                        "name": "Priority",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "recCtrlIn": {
+                    "$ref": "#/definitions/RecCtrlIn",
+                    "xml": {
+                        "name": "RecCtrlIn",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "requestId": {
+                    "type": "string",
+                    "xml": {
+                        "name": "RequestId",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "requestedOperationType": {
+                    "type": "string",
+                    "xml": {
+                        "name": "RequestedOperationType",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "resumeId": {
+                    "type": "string",
+                    "xml": {
+                        "name": "ResumeId",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "returnValue": {
+                    "type": "string",
+                    "xml": {
+                        "name": "ReturnValue",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "reverseId": {
+                    "type": "string",
+                    "xml": {
+                        "name": "ReverseId",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "sourceChannelCode": {
+                    "type": "string",
+                    "xml": {
+                        "name": "SourceChannelCode",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "supervisorCode": {
+                    "type": "string",
+                    "xml": {
+                        "name": "SupervisorCode",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "vbprotocol": {
+                    "$ref": "#/definitions/VBProtocol"
+                }
+            },
+            "xml": {
+                "name": "MsgRqHdr",
+                "attribute": false,
+                "wrapped": false
+            }
+        },
+        "MsgRsHdr": {
+            "title": "MsgRsHdr",
+            "type": "object",
+            "properties": {
+                "appName": {
+                    "type": "string",
+                    "xml": {
+                        "name": "AppName",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "countDataOut": {
+                    "type": "string",
+                    "xml": {
+                        "name": "CountDataOut",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "detailReg": {
+                    "type": "string",
+                    "xml": {
+                        "name": "DetailReg",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "detailTypeReg": {
+                    "type": "string",
+                    "xml": {
+                        "name": "DetailTypeReg",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "finalStatusRequest": {
+                    "type": "string",
+                    "xml": {
+                        "name": "FinalStatusRequest",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "headerTypeReg": {
+                    "type": "string",
+                    "xml": {
+                        "name": "HeaderTypeReg",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "lastStatusRequest": {
+                    "type": "string",
+                    "xml": {
+                        "name": "LastStatusRequest",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "messageDate": {
+                    "type": "string",
+                    "xml": {
+                        "name": "MessageDate",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "messageTime": {
+                    "type": "string",
+                    "xml": {
+                        "name": "MessageTime",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "operationType": {
+                    "type": "string",
+                    "xml": {
+                        "name": "OperationType",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "privateChannelId": {
+                    "type": "string",
+                    "xml": {
+                        "name": "PrivateChannelId",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "registerNumber": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "xml": {
+                        "name": "RegisterNumber",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "requestId": {
+                    "type": "string",
+                    "xml": {
+                        "name": "RequestId",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "requestNumber": {
+                    "type": "string",
+                    "xml": {
+                        "name": "RequestNumber",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "requestStatus": {
+                    "type": "string",
+                    "xml": {
+                        "name": "RequestStatus",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "requestedOperationType": {
+                    "type": "string",
+                    "xml": {
+                        "name": "RequestedOperationType",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "returnValue": {
+                    "type": "string",
+                    "xml": {
+                        "name": "ReturnValue",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "supervisorCode": {
+                    "type": "string",
+                    "xml": {
+                        "name": "SupervisorCode",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "transacctionDate": {
+                    "type": "string",
+                    "xml": {
+                        "name": "TransacctionDate",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "transactionCode": {
+                    "type": "string",
+                    "xml": {
+                        "name": "TransactionCode",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "transactionConsecutive": {
+                    "type": "string",
+                    "xml": {
+                        "name": "TransactionConsecutive",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "transactionTime": {
+                    "type": "string",
+                    "xml": {
+                        "name": "TransactionTime",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "transactionType": {
+                    "type": "string",
+                    "xml": {
+                        "name": "TransactionType",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            }
+        },
+        "NetworkTrnInfo": {
+            "title": "NetworkTrnInfo",
+            "type": "object",
+            "properties": {
+                "agencyCode": {
+                    "type": "string",
+                    "xml": {
+                        "name": "AgencyCode",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "bankId": {
+                    "type": "string",
+                    "xml": {
+                        "name": "BankId",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "channelId": {
+                    "type": "string",
+                    "xml": {
+                        "name": "ChannelId",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "channelUserId": {
+                    "type": "string",
+                    "xml": {
+                        "name": "ChannelUserId",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "configuredTransactionCode": {
+                    "type": "string",
+                    "xml": {
+                        "name": "ConfiguredTransactionCode",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "desc": {
+                    "type": "string",
+                    "xml": {
+                        "name": "Desc",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "operationExecIndicator": {
+                    "type": "string",
+                    "xml": {
+                        "name": "OperationExecIndicator",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "operationType": {
+                    "type": "string",
+                    "xml": {
+                        "name": "OperationType",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "originatorName": {
+                    "type": "string",
+                    "xml": {
+                        "name": "OriginatorName",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "registerNumber": {
+                    "type": "string",
+                    "xml": {
+                        "name": "RegisterNumber",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "transactionCode": {
+                    "type": "string",
+                    "xml": {
+                        "name": "TransactionCode",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "transactionConsecutive": {
+                    "type": "string",
+                    "xml": {
+                        "name": "TransactionConsecutive",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "transactionDate": {
+                    "type": "string",
+                    "xml": {
+                        "name": "TransactionDate",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "transactionTime": {
+                    "type": "string",
+                    "xml": {
+                        "name": "TransactionTime",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "transactionType": {
+                    "type": "string",
+                    "xml": {
+                        "name": "TransactionType",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "userId": {
+                    "type": "string",
+                    "xml": {
+                        "name": "UserId",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "userType": {
+                    "type": "string",
+                    "xml": {
+                        "name": "UserType",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            },
+            "xml": {
+                "name": "NetworkTrnInfo",
+                "attribute": false,
+                "wrapped": false
+            }
+        },
+        "OtherIdentDoc": {
+            "title": "OtherIdentDoc",
+            "type": "object",
+            "properties": {
+                "identSerialNum": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "xml": {
+                        "name": "IdentSerialNum",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "type": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "xml": {
+                        "name": "Type",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            },
+            "xml": {
+                "name": "OtherIdentDoc",
+                "attribute": false,
+                "wrapped": false
+            }
+        },
+        "OtherIdentDocRequest": {
+            "title": "OtherIdentDocRequest",
+            "type": "object",
+            "properties": {
+                "identSerialNum": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "type": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "PersonInfo": {
+            "title": "PersonInfo",
+            "type": "object",
+            "properties": {
+                "fullName": {
+                    "type": "string",
+                    "xml": {
+                        "name": "FullName",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            },
+            "xml": {
+                "name": "PersonInfo",
+                "attribute": false,
+                "wrapped": false
+            }
+        },
+        "PersonInfoRequest": {
+            "title": "PersonInfoRequest",
+            "type": "object",
+            "properties": {
+                "fullName": {
+                    "type": "string"
+                },
+                "otherIdentDoc": {
+                    "$ref": "#/definitions/OtherIdentDocRequest"
+                }
+            }
+        },
+        "ReadAccountBalanceRs": {
+            "title": "ReadAccountBalanceRs",
+            "type": "object",
+            "properties": {
+                "account": {
+                    "$ref": "#/definitions/Account",
+                    "xml": {
+                        "name": "Account",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "customer": {
+                    "$ref": "#/definitions/Customer",
+                    "xml": {
+                        "name": "Customer",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "msgRsHdr": {
+                    "$ref": "#/definitions/MsgRsHdr",
+                    "xml": {
+                        "name": "MsgRsHdr",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "status": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Status"
+                    },
+                    "xml": {
+                        "name": "Status",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            },
+            "xml": {
+                "name": "readAccountBalance_Rs",
+                "attribute": false,
+                "wrapped": false
+            }
+        },
+        "RecCtrlIn": {
+            "title": "RecCtrlIn",
+            "type": "object",
+            "properties": {
+                "maxRec": {
+                    "type": "string",
+                    "xml": {
+                        "name": "MaxRec",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            },
+            "xml": {
+                "name": "RecCtrlIn",
+                "attribute": false,
+                "wrapped": false
+            }
+        },
+        "Status": {
+            "title": "Status",
+            "type": "object",
+            "properties": {
+                "additionalStatus": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AdditionalStatus"
+                    },
+                    "xml": {
+                        "name": "AdditionalStatus",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "applicationName": {
+                    "type": "string",
+                    "xml": {
+                        "name": "ApplicationName",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "lineNumber": {
+                    "type": "integer",
+                    "xml": {
+                        "name": "LineNumber",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "logId": {
+                    "type": "string",
+                    "xml": {
+                        "name": "LogId",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "severity": {
+                    "type": "string",
+                    "xml": {
+                        "name": "Severity",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "statusCode": {
+                    "type": "string",
+                    "xml": {
+                        "name": "StatusCode",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "statusDesc": {
+                    "type": "string",
+                    "xml": {
+                        "name": "StatusDesc",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "statusInd": {
+                    "type": "string",
+                    "xml": {
+                        "name": "StatusInd",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "statusType": {
+                    "type": "string",
+                    "xml": {
+                        "name": "StatusType",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            }
+        },
+        "StatusResponse": {
+            "title": "StatusResponse",
+            "type": "object",
+            "properties": {
+                "statusCode": {
+                    "type": "string"
+                },
+                "statusDesc": {
+                    "type": "string"
+                }
+            }
+        },
+        "TaxInfo": {
+            "title": "TaxInfo",
+            "type": "object",
+            "properties": {
+                "curAmt": {
+                    "$ref": "#/definitions/CurAmt",
+                    "xml": {
+                        "name": "CurAmt",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            }
+        },
+        "Taxes": {
+            "title": "Taxes",
+            "type": "object",
+            "properties": {
+                "taxInfo": {
+                    "$ref": "#/definitions/TaxInfo",
+                    "xml": {
+                        "name": "TaxInfo",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "taxType": {
+                    "type": "string",
+                    "xml": {
+                        "name": "TaxType",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            }
+        },
+        "TransactionResponse": {
+            "title": "TransactionResponse",
+            "type": "object",
+            "properties": {
+                "referenceCode": {
+                    "type": "string"
+                },
+                "transactionStatus": {
+                    "$ref": "#/definitions/StatusResponse"
+                }
+            }
+        },
+        "TransferBanescoAccountRq": {
+            "title": "TransferBanescoAccountRq",
+            "type": "object",
+            "properties": {
+                "account": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Account"
+                    },
+                    "xml": {
+                        "name": "Account",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "banking": {
+                    "$ref": "#/definitions/Banking",
+                    "xml": {
+                        "name": "Banking",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "msgRqHdr": {
+                    "$ref": "#/definitions/MsgRqHdr",
+                    "xml": {
+                        "name": "MsgRqHdr",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            },
+            "xml": {
+                "name": "transferBanescoAccount_Rq",
+                "attribute": false,
+                "wrapped": false
+            }
+        },
+        "TransferBanescoAccountRs": {
+            "title": "TransferBanescoAccountRs",
+            "type": "object",
+            "properties": {
+                "customer": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Customer"
+                    },
+                    "xml": {
+                        "name": "Customer",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "msgRsHdr": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MsgRsHdr"
+                    },
+                    "xml": {
+                        "name": "MsgRsHdr",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "status": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Status"
+                    },
+                    "xml": {
+                        "name": "Status",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "taxes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Taxes"
+                    },
+                    "xml": {
+                        "name": "Taxes",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            }
+        },
+        "TransferOtherBankAccountRq": {
+            "title": "TransferOtherBankAccountRq",
+            "type": "object",
+            "properties": {
+                "account": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Account"
+                    },
+                    "xml": {
+                        "name": "Account",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "banking": {
+                    "$ref": "#/definitions/Banking",
+                    "xml": {
+                        "name": "Banking",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "msgRqHdr": {
+                    "$ref": "#/definitions/MsgRqHdr",
+                    "xml": {
+                        "name": "MsgRqHdr",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            },
+            "xml": {
+                "name": "transferOtherBankAccount_Rq",
+                "attribute": false,
+                "wrapped": false
+            }
+        },
+        "TransferOtherBankAccountRs": {
+            "title": "TransferOtherBankAccountRs",
+            "type": "object",
+            "properties": {
+                "banking": {
+                    "$ref": "#/definitions/Banking",
+                    "xml": {
+                        "name": "Banking",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "msgRsHdr": {
+                    "$ref": "#/definitions/MsgRsHdr",
+                    "xml": {
+                        "name": "MsgRsHdr",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "status": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Status"
+                    },
+                    "xml": {
+                        "name": "Status",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            },
+            "xml": {
+                "name": "transferOtherBankAccount_Rs",
+                "attribute": false,
+                "wrapped": false
+            }
+        },
+        "TransferRequest": {
+            "title": "TransferRequest",
+            "type": "object",
+            "properties": {
+                "account": {
+                    "description": "Cuentas",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AccountRequest"
+                    }
+                },
+                "banking": {
+                    "$ref": "#/definitions/BankingRequest",
+                    "description": "Banking"
+                }
+            }
+        },
+        "TransferResponse": {
+            "title": "TransferResponse",
+            "type": "object",
+            "properties": {
+                "transaction": {
+                    "$ref": "#/definitions/TransactionResponse",
+                    "description": "Transacción"
+                }
+            },
+            "example": {
+                "transaction": {
+                    "referenceCode": "tah5IWtF7uD",
+                    "transactionStatus": {
+                        "statusCode": "1",
+                        "statusDesc": "Operación exitosa"
+                    }
+                }
+            }
+        },
+        "VBProtocol": {
+            "title": "VBProtocol",
+            "type": "object",
+            "properties": {
+                "transactionInd": {
+                    "type": "boolean",
+                    "xml": {
+                        "name": "TransactionInd",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "vbprotocolInd": {
+                    "type": "boolean"
+                }
+            },
+            "xml": {
+                "name": "VBProtocol",
+                "attribute": false,
+                "wrapped": false
+            }
+        },
+        "ValidateCustomerBlackListRs": {
+            "title": "ValidateCustomerBlackListRs",
+            "type": "object",
+            "properties": {
+                "blackList": {
+                    "$ref": "#/definitions/BlackList",
+                    "xml": {
+                        "name": "BlackList",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "msgRsHdr": {
+                    "$ref": "#/definitions/MsgRsHdr",
+                    "xml": {
+                        "name": "MsgRsHdr",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                },
+                "status": {
+                    "$ref": "#/definitions/Status",
+                    "xml": {
+                        "name": "Status",
+                        "attribute": false,
+                        "wrapped": false
+                    }
+                }
+            },
+            "xml": {
+                "name": "validateCustomerBlackList_Rs",
+                "attribute": false,
+                "wrapped": false
+            }
+        }
+    },
+    "responses": {
+        "transferExito": {
+            "description": "Respuesta de exito de la operacion transfer",
+            "schema": {
+                "$ref": "#/definitions/TransferResponse"
+            },
+            "examples": {
+                "application/json": {
+                    "transaction": {
+                        "referenceCode": "tah5IWtF7uD",
+                        "transactionStatus": {
+                            "statusCode": "1",
+                            "statusDesc": "Operación exitosa"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "api_key": {
+            "type": "apiKey",
+            "description": "Security Scheme",
+            "name": "user_key",
+            "in": "query"
+        }
+    },
+    "security": [
+        {
+            "api_key": [
+            ]
+        }
+    ],
+    "tags": [
+        {
+            "name": "financial-account-controller",
+            "description": "API de Cuentas Financieras"
+        },
+        {
+            "name": "generator-id-controller",
+            "description": "Generador de identificadores únicos"
+        },
+        {
+            "name": "header-controller",
+            "description": "Generador de cabecera del mensaje de solicitud"
+        },
+        {
+            "name": "risk-rating-controller",
+            "description": "API de Calificación de Riesgo"
+        }
+    ]
+}
